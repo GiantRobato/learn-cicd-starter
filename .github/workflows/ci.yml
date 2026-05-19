@@ -1,0 +1,30 @@
+# name of workflow
+name: ci
+
+# trigger conditions
+on:
+  pull_request:
+    branches: [main]
+
+# what jobs to run
+jobs:
+  tests:
+    name: Tests # display name
+    runs-on: ubuntu-latest # runner? git provided? who pays?
+
+    # each step has
+    # name: <name of step>
+    # run: shell command?
+    # uses: defined action? binary?
+    # with: args?
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.26.0"
+
+      - name: Force Failure
+        run: (exit 1)
