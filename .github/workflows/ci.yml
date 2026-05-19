@@ -1,0 +1,31 @@
+# name of workflow
+name: ci
+
+# trigger conditions for this workflow
+on:
+  pull_request:
+    branches: [main]
+
+# what jobs to run
+jobs:
+  tests:
+    name: Tests # display name
+    runs-on: ubuntu-latest # type of runner, default to github hosted?
+
+    # each step has
+    # name: <name of step, human readable>
+    # run: shell command?
+    # uses: defined action? binary?
+    # with: args?
+    steps:
+      # https://github.com/actions/checkout
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.26.0"
+
+      - name: Run tests
+        run: go test ./... -cover
