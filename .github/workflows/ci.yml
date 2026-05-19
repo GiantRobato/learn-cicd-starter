@@ -1,7 +1,7 @@
 # name of workflow
 name: ci
 
-# trigger conditions
+# trigger conditions for this workflow
 on:
   pull_request:
     branches: [main]
@@ -26,5 +26,5 @@ jobs:
         with:
           go-version: "1.26.0"
 
-      - name: Force Failure
-        run: (exit 1)
+      - name: Print go version
+        run: go version
